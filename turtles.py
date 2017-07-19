@@ -9,6 +9,14 @@ def draw_polygon(t, sides, color="hotpink", length=50, fill="purple"):
         t.left(360/sides)
     t.end_fill()
 
+def draw_equi_triangle(t, size):
+    draw_polygon(t, 3, length=size)
+
+def draw_square(t, length=50):
+    for side in range(4):
+        t.forward(length)
+        t.left(90)
+
 def draw_star(t, points):
     for num in range(points):
         t.forward(100)
@@ -19,13 +27,24 @@ def draw_path(t, turns_list):
         t.left(turn)
         t.forward(100)
 
-def draw_sprite(t, legs):
-    
+def draw_sprite(t, legs, length=50):
     for leg in range(legs):
         t.forward(50)
         t.back(50)
         t.right(360/legs)
 
+def draw_fancy_square(t, size, sprite_size, sprite_legs):
+    for i in range(4):
+        t.forward(size)
+        draw_sprite(t, sprite_legs, length=sprite_size)
+        t.left(90)
+
+def draw_spiral(t, offset, angle, layers):
+    accum = 2
+    for i in range(layers):
+        t.left(angle)
+        t.forward(accum)
+        accum += offset
 
 def main():
     wn = turtle.Screen()             # Set up the window and its attributes
@@ -35,7 +54,9 @@ def main():
     tess.color("red")
     tess.pensize(2)
 
-    # Unit 1, Chapter 4
+
+
+    #### CHAPTER 4 ####
     # Exercise 5 & 6
     #draw_polygon(tess, 5)
 
@@ -50,15 +71,81 @@ def main():
     # Creative Turtle drawing
 
     # Exercise 13
-    # Draw a sprite with n legs, where n is given with input()
-    #draw_sprite(tess, 12)
+    # draw_sprite(tess, 12)
+
+    #### CHAPTER 5 ####
+    # Exercise 1
+    # for num in range(4):
+    #     draw_polygon(tess, 4, length=20)
+    #     tess.penup()
+    #     tess.forward(40)
+    #     tess.pendown()    
+
+    # Exercise 2
+    # sz = 20
+    # for num in range(5):
+    #     draw_square(tess, length=sz)
+    #     tess.penup()
+    #     tess.right(90)
+    #     tess.forward(10)
+    #     tess.right(90)
+    #     tess.forward(10)
+    #     tess.right(180)
+    #     tess.pendown()
+    #     sz += 20
+
+    # Exercise 3
+    # draw_polygon(tess, 8, length=50)
 
 
+
+    # Exercise 4
+    # alex = turtle.Turtle()
+    # alex.color("blue")
+    # alex.pensize(1)
+    # alex.speed(0)
+
+    # tess.speed(0)
+
+    # draw_spiral(alex, 1.5, 89, 150)
+    # draw_spiral(tess, 2, 90, 150)
+
+
+
+    # Exercise 5
+    # draw_equi_triangle(tess, 30)
+
+    # Exercise 7
+    # draw_star(tess, 5)
+
+    # Exercise 8
+    # tess.penup()
+    # tess.left(180)
+    # tess.forward(200)
+    # tess.left(180)
+    # tess.pendown()  #initialize start position so it fits
+
+    # for i in range(5):
+    #     draw_star(tess, 5)
+    #     tess.penup()
+    #     tess.forward(350)
+    #     tess.right(144)
+    #     tess.pendown()
+
+    # Exercise 9
+    # Already n-pointed star fn
+
+    # Exercise 10
+    # draw_sprite(tess, 9, length=100)
+
+    # Exercise 12 - "Fancy Square"
+    # draw_fancy_square(tess, 100, 150, 12)
 
     wn.exitonclick()
 
 if __name__ == "__main__":
     main()
+
 
 
 #### Turtle code to canabalize later. ####

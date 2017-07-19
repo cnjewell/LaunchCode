@@ -1,0 +1,20 @@
+Cheat sheet for using git and github
+
+Basic CL commands
+#################
+
+git init					start new
+git add .					ready all modified files to be committed
+git status					check which files are modified, which are added
+git commit -m "message"		commit those files
+
+Remote github commands
+######################
+git remote add origin https://github.com/cnjewell/LaunchCode
+							sets the new remote repository
+							
+git remote -v				verifies new remote
+git push -u origin master	pushes commits to defined remote repository you
+							you speified as the origin
+
+git reset HEAD YOUR_FILE	Remove a specific file you just 'added'/staged to commit

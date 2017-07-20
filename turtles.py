@@ -1,4 +1,5 @@
 import turtle
+import random
 
 def draw_polygon(t, sides, color="hotpink", length=50, fill="purple"):
     t.color(color)
@@ -45,6 +46,66 @@ def draw_spiral(t, offset, angle, layers):
         t.left(angle)
         t.forward(accum)
         accum += offset
+
+def draw_bar(t, height):
+    """ Get turtle t to draw one bar, of height. """
+    if height >= 200:
+        t.fillcolor("red")
+    elif height >= 100 and height < 200:
+        t.fillcolor("yellow")
+    else:
+        t.fillcolor("green")
+        
+    t.begin_fill()               # start filling this shape
+    t.left(90)
+    t.forward(height)
+    t.write(str(height))
+    t.right(90)
+    t.forward(40)
+    t.right(90)
+    t.forward(height)
+    t.left(90)
+    t.end_fill()                 # stop filling this shape
+
+def is_in_screen(screen, t):
+    left_bound = - screen.window_width() / 2
+    right_bound = screen.window_width() / 2
+    top_bound = screen.window_height() / 2
+    bottom_bound = -screen.window_height() / 2
+
+    turtle_x = t.xcor()
+    turtle_y = t.ycor()
+
+    still_in = True
+    if turtle_x > right_bound or turtle_x < left_bound:
+        still_in = False
+    if turtle_y > top_bound or turtle_y < bottom_bound:
+        still_in = False
+
+    return still_in
+
+def are_turtles_in_screen(screen):
+    left_bound = - screen.window_width() / 2
+    right_bound = screen.window_width() / 2
+    top_bound = screen.window_height() / 2
+    bottom_bound = -screen.window_height() / 2
+
+    turtles_out = 0
+    still_in = True
+
+    for t in screen.turtles():
+        turtle_x = t.xcor()
+        turtle_y = t.ycor()
+
+        if turtle_x > right_bound or turtle_x < left_bound:
+            turtles_out += 1
+        if turtle_y > top_bound or turtle_y < bottom_bound:
+            turtles_out += 1
+
+    if turtles_out:  #if any turtles added to turtles_out, False 
+        return False
+    else:
+        return True  #if no turtles added, then True they are all in
 
 def main():
     wn = turtle.Screen()             # Set up the window and its attributes
@@ -141,48 +202,24 @@ def main():
     # Exercise 12 - "Fancy Square"
     # draw_fancy_square(tess, 100, 150, 12)
 
+    ### Chapter 6 ####
+    # Exercise 3 & 4
+    # data = [48, 117, 200, 240, 160, 260, 220]
+
+    # Not sure how to make negative work...
+    
+    # max_height = max(data)
+    # min_height = min(data)
+    # num_bars = len(data)
+    # border = 10
+    # wn.setworldcoordinates(0-border, 0-border, 40 * num_bars + border, max_height + border)
+
+    # for x in data:
+    #     draw_bar(tess, x)
+
+
     wn.exitonclick()
 
 if __name__ == "__main__":
     main()
-
-
-
-#### Turtle code to canabalize later. ####
-
-# def draw_bar(t, height):
-#     """ Get turtle t to draw one bar, of height. """
-#     t.begin_fill()               # start filling this shape
-#     t.left(90)
-#     t.forward(height)
-#     t.write(str(height))
-#     t.right(90)
-#     t.forward(40)
-#     t.right(90)
-#     t.forward(height)
-#     t.left(90)
-#     t.end_fill()                 # stop filling this shape
-
-# def main():
-#     data = [48, 117, 200, 240, 160, 260, 220]
-#     max_height = max(data)
-#     num_bars = len(data)
-#     border = 10
-
-#     wn = turtle.Screen()             # Set up the window and its attributes
-#     wn.setworldcoordinates(0-border, 0-border, 40 * num_bars + border, max_height + border)
-#     wn.bgcolor("lightgreen")
-
-#     tess = turtle.Turtle()           # create tess and set some attributes
-#     tess.color("blue")
-#     tess.fillcolor("red")
-#     tess.pensize(3)
-
-#     for x in data:
-#         draw_bar(tess, x)
-
-#     wn.exitonclick()
-
-# if __name__ == "__main__":
-#     main()
 

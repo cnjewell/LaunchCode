@@ -68,8 +68,6 @@ def is_turtle_disaster(screen, t):
 
 def main():
     wn = turtle.Screen()             # Set up the window and its attributes
-    wn.bgcolor("lightgreen")
-
 
     #### Chapter 8 ####
     tess = turtle.Turtle()           # create tess and set some attributes

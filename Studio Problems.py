@@ -1,5 +1,6 @@
 # Studio Problems
 import turtle
+import random
 
 def holiday():
     start = int(input('Start Date: '))
@@ -19,6 +20,28 @@ def donuts():
     total = round(retail * qty * 1.05, 2)
     print("After tax, your total is:", total)
     print("Thank you for snacking! Loop back around here soon!")
+
+def turtle_racing():
+    wn = turtle.Screen()       
+    wn.bgcolor('lightblue')
+
+    lance = turtle.Turtle()    
+    andy = turtle.Turtle()
+    lance.color('red')
+    andy.color('blue')
+    lance.shape('turtle')
+    andy.shape('turtle')
+
+    andy.up()                 
+    lance.up()
+    andy.goto(-100,20)
+    lance.goto(-100,-20)
+
+    for n in range(random.randrange(6, 10)):
+        for t in wn.turtles():
+            t.forward(random.randrange(2, 50))
+
+    wn.exitonclick()
 
 def wagon_wheel(t):
     # draw 4 squares rotated around the origin
@@ -75,11 +98,18 @@ def sherlock(guests):
         else:
             return "Go Away! (sound of violin music...)"
 
+def times_tables(n):
+    for i in range(n+1):
+        for j in range(n+1):
+            print(j*i, end="\t")
+        print('')
+
 def main():
     # holiday()     # Studio 1
     # donuts()      # Studio 2
 
     # Studio 3 is a turtle race, I'll just use some of my other turtle code....
+    # turtle_racing()
 
     # wagon_wheel() # Studio 4
     # wn = turtle.Screen()
@@ -116,17 +146,24 @@ def main():
     # print(accum_fib(100))
 
     # Studio 5
-    press = ["a reporter from the Times", "a reporter from the Observer"]
-    family_etc = ["Mycroft Holmes", "Mrs. Hudson"]
-    enemies = ["Professor Moriarty", "Charles Augustus Milverton", "John Woodley"]
-    potential_love_interest = ["Irene Adler"]
-    friends = ["Inspector Lestrade", "Dr. Watson"]
+    # press = ["a reporter from the Times", "a reporter from the Observer"]
+    # family_etc = ["Mycroft Holmes", "Mrs. Hudson"]
+    # enemies = ["Professor Moriarty", "Charles Augustus Milverton", "John Woodley"]
+    # potential_love_interest = ["Irene Adler"]
+    # friends = ["Inspector Lestrade", "Dr. Watson"]
 
-    print(sherlock(press))
-    print(sherlock(family_etc))
-    print(sherlock(enemies))
-    print(sherlock(potential_love_interest))
-    print(sherlock(friends))
+    # print(sherlock(press))
+    # print(sherlock(family_etc))
+    # print(sherlock(enemies))
+    # print(sherlock(potential_love_interest))
+    # print(sherlock(friends))
+
+    # Studio 6
+
+    # Bonus Missions - Mission 1
+    times_tables(6)
+
+    # Bonus Missions - Mission 2
 
 if __name__ == "__main__":
     main()

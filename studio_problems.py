@@ -101,8 +101,32 @@ def sherlock(guests):
 def times_tables(n):
     for i in range(n+1):
         for j in range(n+1):
-            print(j*i, end="\t")
+            print(i * j,'\t', end='')
         print('')
+
+def roshambo():
+    best_of = int(input("Best of how many games? "))
+    games_to_win = (best_of//2)+1
+    
+    cpu_score = 0
+    ply_score = 0
+
+    while cpu_score < games_to_win and ply_score < games_to_win:
+        ply = int(input("Rock (0), Paper (1), or Scissors (2)? "))
+        cpu = random.randrange(0,2)
+        throw = (ply, cpu)
+        if ply == cpu:
+            print("Tie. No score this round.")
+        elif throw == (1,0) or throw == (2,1) or throw == (0,2):
+            ply_score += 1
+        else:
+            cpu_score += 1
+        print("Current Score:")
+        print("Player:", ply_score, "CPU:", cpu_score)
+    if cpu_score > ply_score:
+        print("CPU Wins!")
+    else:
+        print("Player Wins!")   
 
 def main():
     # holiday()     # Studio 1
@@ -161,9 +185,11 @@ def main():
     # Studio 6
 
     # Bonus Missions - Mission 1
-    times_tables(6)
+    # times_tables(6)
 
     # Bonus Missions - Mission 2
+    roshambo()
+
 
 if __name__ == "__main__":
     main()

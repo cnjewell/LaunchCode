@@ -136,13 +136,44 @@ def sieve_eratosthenes5(n):
             continue
         num = index+1
         for j in range((num)*3, n+1, num*2):
-            # print(num, j)
             primes[j-1] = False
     
-    primes_only = [2] + [odd for odd in range(2, n, 2) if primes[odd]]
+    primes_only = [2] + [odd+1 for odd in range(2, n, 2) if primes[odd]]
 
     print(len(primes_only)) # check to see if I'm getting the right number of primes
     return primes_only
+
+def sieve_eratosthenes6(n):
+    primes = [True] * n
+    # Limit my search space to coprimes with the form 6*m+|-1, up to sqrt(n)
+    for index in coprimes(n): 
+        if primes[index] == False:  
+            continue
+        num = index
+        for j in range((num)*3, n+1, num*2):
+            # print(num, j)
+            primes[j-1] = False
+    
+    primes_only = [2] + [odd+1 for odd in range(2, n, 2) if primes[odd]]
+
+    # print("Sieve of Erato v6")
+    print(len(primes_only)) # check to see if I'm getting the right number of primes
+    # print(primes_only[0:19]) # A slice of primes to check for wonkiness
+
+    return primes_only
+
+def coprimes(n):
+    '''Outputs list of coprimes upto sqrt(n) for use in a sieve'''
+    output = [3]
+    limit = int(math.sqrt(n))//6+1
+
+    for m in range(1, limit):
+        output = output + [6*m-1] + [6*m+1]
+
+    # print("Coprimes up to sqrt(n):",len(output))
+    # # print(output)
+
+    return output
 
 def sieve_atkin(n):
     pass
@@ -183,22 +214,22 @@ def main():
     base_time = time.time() - start
 
     start = time.time()
-    sieve_eratosthenes2(10000)
+    sieve_eratosthenes5(10000)
     my_time = time.time() - start
 
-    print("Base time:", base_time)
-    print("My time:", my_time)
-    print("Schmidt Score:", my_time / base_time)
+    print("Base time:\t", base_time)
+    print("My time:\t", my_time)
+    print("Score:  \t", my_time / base_time)
 
     print('')
 
     start = time.time()
-    sieve_eratosthenes5(10000)
+    sieve_eratosthenes6(10000)
     my_time = time.time() - start
 
-    print("Base time:", base_time)
-    print("My time:", my_time)
-    print("Schmidt Score:", my_time / base_time)      
+    print("Base time:\t", base_time)
+    print("My time:\t", my_time)
+    print("Score:  \t", my_time / base_time)      
 
 if __name__ == "__main__":
     main()

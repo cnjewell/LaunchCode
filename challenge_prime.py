@@ -50,10 +50,12 @@ def sieve_eratosthenes2(n):
     
     primelist = [i+1 for i,x in enumerate(primes) if x == True]
     
-    print(len(primelist)) #check to see if I'm getting the right number of primes
+    print(len(primelist)) # check to see if I'm getting the right number of primes
     return primelist
     
 def sieve_eratosthenes3(n):
+    # AKA, trying to udnerstand what Schmidt was hinting at
+
     primes = [False for x in range(n)]
     primes[1] = True # 2 is prime
     primes[2] = True # 3 is prime
@@ -89,6 +91,59 @@ def sieve_eratosthenes3(n):
     print(len(primelist))
     return primelist
     
+def sieve_eratosthenes4(n):
+    # Credit to @past aka Brian H aka 007 for the nudge in this direction.
+
+    is_prime_list = [True] * 100
+    only_primes = [3,5,7] # the first few primes for factorization
+
+    for prime_to_factor in only_primes:
+        max_factor = 100//prime_to_factor
+        if max_factor % 2 == 0: 
+            max_factor -= 1
+        for odd in range(prime_to_factor, max_factor+1, 2): # every other odd upto max_factor
+            is_prime_list[prime_to_factor * odd] = False
+
+    for odd in range(3, 100, 2):
+        if is_prime_list[odd] == True:
+            only_primes.append(odd)
+
+    is_prime_list = [True] * 10000
+    for prime_to_factor in only_primes:
+        max_factor = 10000//prime_to_factor
+        if max_factor % 2 == 0: 
+            max_factor -= 1
+        for odd in range(prime_to_factor, max_factor+1, 2):
+            is_prime_list[prime_to_factor * odd] = False
+
+    only_primes = []
+    for odd_index in range(3, 10000, 2):
+        if is_prime_list[odd_index] == True:
+            only_primes.append(odd_index)
+    
+    only_primes.insert(0,2) # Add 2 now that all the factorization is done
+    
+    print(len(only_primes))
+    return only_primes
+
+def sieve_eratosthenes5(n):
+    primes = [True] * n
+    
+    limit = int(math.sqrt(n))
+    
+    for index in range(2, limit, 2): #start at 3, only check odds
+        if primes[index] == False:  
+            continue
+        num = index+1
+        for j in range((num)*3, n+1, num*2):
+            # print(num, j)
+            primes[j-1] = False
+    
+    primes_only = [2] + [odd for odd in range(2, n, 2) if primes[odd]]
+
+    print(len(primes_only)) # check to see if I'm getting the right number of primes
+    return primes_only
+
 def sieve_atkin(n):
     pass
 
@@ -138,7 +193,7 @@ def main():
     print('')
 
     start = time.time()
-    sieve_eratosthenes3(10000)
+    sieve_eratosthenes5(10000)
     my_time = time.time() - start
 
     print("Base time:", base_time)

@@ -38,15 +38,17 @@ def drawLsystem(aTurtle, instructions, angle, distance):
             aTurtle.left(angle)
 
 def main():
-    inst = createLSystem(12, "F")   # create the string
+    inst = createLSystem(13, "F")   # create the string
     print(inst)
     t = turtle.Turtle()            # create the turtle
     wn = turtle.Screen()
 
     t.speed(0)
-    t.hideturtle()  
-    drawLsystem(t, inst, 45, 2)   # draw the picture
+    t.tracer(False)
+    # t.hideturtle()  
+    drawLsystem(t, inst, 45, 4)   # draw the picture
                                   # angle 60, segment length 5
+    wn.update()
     wn.exitonclick()
 
 main()

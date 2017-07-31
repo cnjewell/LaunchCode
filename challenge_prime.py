@@ -175,10 +175,7 @@ def coprimes(n):
 
     return output
 
-def sieve_atkin(n):
-    pass
-
-def atkin(limit):    
+def atkin(limit):
     is_prime = [False] * (limit + 1)
     is_prime[2] = True
     is_prime[3] = True

@@ -21,9 +21,9 @@ def course_grader(test_scores):
         underseventy += 1
         
     if underfifty+underseventy:
-        return("Fail")
+        return("fail")
     else:
-        return("Pass")
+        return("pass")
 
 def main():
     

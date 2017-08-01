@@ -152,7 +152,7 @@ def pig_latinizer(string):
     latinized_output = ''
     for index, word in enumerate(words_list):
         if word[0] in "AaEeIiOoUu":
-            #If the first letter of word is a vowel, don't move the first letter to end
+            # If the first letter of word is a vowel, don't move the first letter to end
             latinized_output += word + 'ay'
         else:
             latinized_output += word[1:] + word[0] + 'ay'
@@ -160,8 +160,6 @@ def pig_latinizer(string):
             # Add a space between words, unless this is the first word!
             latinized_output += ' '
     return latinized_output
-    # final_string = ' '.join(latinized)
-    # return final_string
 
 def print_every(i, nums):
     for index in range(0, len(nums), i):

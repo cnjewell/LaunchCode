@@ -18,3 +18,7 @@ def rotate_character(char, rot):
             return string.ascii_uppercase[(alphabet_position(char)+rot)%26]
     else:
         return char # Pass through non-alpha characters
+
+def xor_character(char, key):
+    '''Returns a unicode charater that has been XOR'd by key'''
+    return chr((ord(char) ^ ord(key)))

@@ -1,4 +1,5 @@
 import string
+from test import testEqual
 
 def intlen(n):
     return len(str(n))
@@ -51,6 +52,19 @@ def rot13(mess):
             output = output + char
     return output
 
+# def analyze_text(text):
+#     alpha_count = 0
+#     e_count = 0
+#     for char in text:
+#         if char.isalpha():
+#             alpha_count += 1
+#         if char == 'e' or char == 'E':
+#             e_count += 1
+#     e_percent = 0.0
+#     if e_count != 0:
+#         e_percent = round((e_count/alpha_count) * 100, 10)
+#     return "The text contains {0} alphabetic characters, of which {1} ({2}%) are 'e'.".format(alpha_count,e_count,e_percent)
+
 def analyze_text(text):
     alpha_count = 0
     e_count = 0
@@ -61,8 +75,9 @@ def analyze_text(text):
             e_count += 1
     e_percent = 0.0
     if e_count != 0:
-        e_percent = round((e_count/alpha_count) * 100)
+        e_percent = float((e_count/alpha_count) * 100)
     return "The text contains {0} alphabetic characters, of which {1} ({2}%) are 'e'.".format(alpha_count,e_count,e_percent)
+
 
 def main():
     # # Exercise 2
@@ -108,19 +123,31 @@ def main():
     print(rot13(rot13('since rot thirteen is symmetric you should see this message')))
 
     # # Weekly Graded Assignment
-    # print('')
-    # text1 = "Eeeee"
-    # answer1 = "The text contains 5 alphabetic characters, of which 5 (100.0%) are 'e'."
-    # print(analyze_text(text1), '\n' + answer1)
+    print('')
+    text1 = "Eeeee"
+    answer1 = "The text contains 5 alphabetic characters, of which 5 (100.0%) are 'e'."
+    testEqual(analyze_text(text1), answer1)
 
-    # text2 = "Blueberries are tasteee!"
-    # answer2 = "The text contains 21 alphabetic characters, of which 7 (33.3333333333%) are 'e'."
-    # print(analyze_text(text2), '\n' + answer2)
+    text2 = "Blueberries are tasteee!"
+    answer2 = "The text contains 21 alphabetic characters, of which 7 (33.3333333333%) are 'e'."
+    testEqual(analyze_text(text2), answer2)
 
-    # text3 = "Wright's book, Gadsby, contains a total of 0 of that most common symbol ;)"
-    # answer3 = "The text contains 55 alphabetic characters, of which 0 (0.0%) are 'e'."
-    # print(analyze_text(text3), '\n' + answer3)
+    text3 = "Wright's book, Gadsby, contains a total of 0 of that most common symbol ;)"
+    answer3 = "The text contains 55 alphabetic characters, of which 0 (0.0%) are 'e'."
+    testEqual(analyze_text(text3), answer3)
     
+    text1 = "Eeeee"
+    answer1 = "The text contains 5 alphabetic characters, of which 5 (100.0%) are 'e'."
+    print(analyze_text(text1), answer1)
+
+    text2 = "Blueberries are tasteee!"
+    answer2 = "The text contains 21 alphabetic characters, of which 7 (33.3333333333%) are 'e'."
+    print(analyze_text(text2), answer2)
+
+    text3 = "Wright's book, Gadsby, contains a total of 0 of that most common symbol ;)"
+    answer3 = "The text contains 55 alphabetic characters, of which 0 (0.0%) are 'e'."
+    print(analyze_text(text3), answer3)
+
     # print(float(1/3))
 if __name__ == "__main__":
     main()

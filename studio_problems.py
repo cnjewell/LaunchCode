@@ -1,7 +1,5 @@
 # Studio Problems
-import turtle
-import random
-import string
+import turtle, random, string
 
 def holiday():
     start = int(input('Start Date: '))
@@ -212,6 +210,7 @@ def bubble_sort(sortlist):
         return sortlist
     
 def main():
+    print()
     # holiday()     # Studio 1
     # donuts()      # Studio 2
 

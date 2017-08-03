@@ -200,9 +200,10 @@ class BaseballPlayer:
         # name - should be required upon init
         # ID # - should be generated and recorded somehwere? Too complicated?
  
-        # grades - An empty list
+        # grades - Must include a way to translate percent grades to grade points
         # credits taken - a counter
-        # GPA - grade points/attempted credit hours. grade points = credit hours * letter grade factor
+        # GPA - grade points/attempted credit hours (typically 3). 
+        #       grade points = credit hours (i.e. 3) * letter grade factor
         # GPA is complicated...
         
         # class standing (Freshman, Graduated, etc.) based on credits taken

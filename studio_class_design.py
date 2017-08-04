@@ -1,6 +1,22 @@
 from math import sqrt
 from test import testEqual
 
+def gcd(numerator, denominator):
+    while numerator % denominator != 0:
+        old_num = numerator
+        old_den = denominator
+
+        numerator = old_den
+        denominator = old_num % old_den
+
+    return denominator
+
+def linear_conversion(old_value, old_min, old_max, new_min, new_max):
+    '''Maps old_value within a new range'''
+    old_range = (old_max - old_min)
+    new_range = (new_max - new_min)
+    return (((old_value - old_min) * new_range) / old_range) + new_min
+
 class Point:
 
     def __init__(self, init_x, init_y):
@@ -103,16 +119,6 @@ class Rectangle:
         else:
             return False
 
-def gcd(numerator, denominator):
-    while numerator % denominator != 0:
-        old_num = numerator
-        old_den = denominator
-
-        numerator = old_den
-        denominator = old_num % old_den
-
-    return denominator
-
 class Fraction:
     
     def __init__(self, numer, denom):
@@ -195,30 +201,103 @@ class BaseballPlayer:
             print("Baseball Player: 'right', 'left' or 'switch' handedness only. Defaulting to 'right'")
             self.handedness = 'right'
 
-# class Student:
-#     def __init__(self):
-        # name - should be required upon init
-        # ID # - should be generated and recorded somehwere? Too complicated?
- 
-        # grades - Must include a way to translate percent grades to grade points
-        # credits taken - a counter
-        # GPA - grade points/attempted credit hours (typically 3). 
-        #       grade points = credit hours (i.e. 3) * letter grade factor
-        # GPA is complicated...
+class Student:
+    def __init__(self, iname, istudent_id):
+        self.name = iname
+        self.student_id = istudent_id
+        self.grades = []
+    
+    def record_grade(self, grade):
+        self.grades.append(grade)
+
+    def earned_credits(self, grade):
+        return round(linear_conversion(grade, 65, 100, 0, 4), 2)
+
+    def get_GPA(self):
+        earned_credit_total = 0
+        for grade in self.grades:
+            earned_credit_total += self.earned_credits(grade)
+        return round(earned_credit_total / len(self.grades), 2)
         
+    def get_standing(self):
         # class standing (Freshman, Graduated, etc.) based on credits taken
+            # How many credits for each status? 
+            # Let's say 12 credits per year
+        standing = {1 : "Freshman", 2 : "Sophomore", 3 : "Junior", 4 : "Senior", 5 : "Graduated"}
+        earned_credit_total = 0
+        for grade in self.grades:
+            earned_credit_total += self.earned_credits(grade)
+        print(earned_credit_total)
+        print(earned_credit_total / 12)
+        if int(earned_credit_total / 12) > 5:
+            return standing[5]
+        else:
+            return standing[int(earned_credit_total / 12)]
 
-# class Course:
-    # def __init__(self):
-        # name
-        # course number
-        # seat limit
-        # roster of student objects
-        # add students
-        # drop students
-        # report average GPA of students on roster
+
+class Course:
+    def __init__(self, iname, icourse_id, iseat_limit):
+        self.name = iname
+        self.course_id = icourse_id
+        self.seat_limit = iseat_limit
+        self.roster = []
+    
+    def add_student(self, student):
+        if self.seat_limit > len(self.roster):
+            self.roster.append(student)
+        else:
+            return False
+    
+    def drop_student(self, student):
+        if student in self.roster:
+            self.roster.remove(student)
+    
+    def get_avg_GPA(self):
+        # for student in roster
+            # accumulate their GPA's
+        # divide GPA sum by class size, round it
+        sum_GPAs = 0
+        for student in self.roster:
+            sum_GPAs += student.get_GPA()
+        return sum_GPAs / len(self.roster)
 
 
+fred = Student("Fred", "456")
+saul = Student("Saul", "310")
+beth = Student("Beth", "418")
 
+stupid_class = Course("English", "ES101", 30)
+
+stupid_class.add_student(fred)
+stupid_class.add_student(saul)
+stupid_class.add_student(beth)
+
+fred.record_grade(100)
+fred.record_grade(90)
+fred.record_grade(70)
+fred.record_grade(99)
+fred.record_grade(99)
+fred.record_grade(99)
+fred.record_grade(99)
+fred.record_grade(99)
+fred.record_grade(99)
+fred.record_grade(99)
+
+saul.record_grade(100)
+saul.record_grade(90)
+saul.record_grade(40)
+saul.record_grade(90)
+saul.record_grade(80)
+saul.record_grade(75)
+saul.record_grade(90)
+
+stupid_class.drop_student(beth)
+
+print(fred.get_GPA())
+print(saul.get_GPA())
+print(stupid_class.get_avg_GPA())
+
+print(fred.get_standing())
+print(saul.get_standing())
 
 

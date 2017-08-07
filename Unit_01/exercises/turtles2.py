@@ -65,7 +65,6 @@ def is_turtle_disaster(screen, t):
             collisions += 1
     return collisions
 
-
 def main():
     wn = turtle.Screen()             # Set up the window and its attributes
 

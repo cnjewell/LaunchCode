@@ -1,14 +1,14 @@
-def initials_only(name):
+def get_initials(name):
     parts = name.split()
     initials = ''
     for part in parts:
         initials += part[0]
-    return initials
+    return initials.upper()
 
 def main():
     print('What is your full name?')
     name = input()
-    print(initials_only(name))
+    print(get_initials(name))
 
 if __name__ == "__main__":
     main()

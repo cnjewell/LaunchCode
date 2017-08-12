@@ -200,7 +200,7 @@ def bubble_sort(sortlist):
     while num_swaps > 0:
         num_swaps = 0 ## Number of swaps made
         for index in range(0, len(sortlist)-1):
-            a = sortlist[index] 
+            a = sortlist[index]
             b = sortlist[index + 1]
             if a > b:
                 sortlist[index] = b
@@ -324,10 +324,10 @@ def main():
     # print(stretch("chihuahua", 4))
     # print(stretch("chihuahua", 4, "ha"))
 
-    # print(bubble_sort([0]), [0])  # Sorts a single element, returns same list
-    # print(bubble_sort([1, 2, 3, 4, 5]), [1, 2, 3, 4, 5])  # Sorted list is the same
-    # print(bubble_sort([5, 4, 3, 2, 1]), [1, 2, 3, 4, 5])
-    # print(bubble_sort([4, 5, 3, 1, 2]), [1, 2, 3, 4, 5])
+    print(bubble_sort([0]), [0])  # Sorts a single element, returns same list
+    print(bubble_sort([1, 2, 3, 4, 5]), [1, 2, 3, 4, 5])  # Sorted list is the same
+    print(bubble_sort([5, 4, 3, 2, 1]), [1, 2, 3, 4, 5])
+    print(bubble_sort([4, 5, 3, 1, 2]), [1, 2, 3, 4, 5])
 
 if __name__ == "__main__":
     main()

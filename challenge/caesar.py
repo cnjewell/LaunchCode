@@ -1,6 +1,6 @@
 # caesar.py per the "Crytpo" External Assignment
 
-import crypto_helper
+import helpers
 from sys import argv, exit
 
 def encrypt(plaintext, rot):
@@ -8,7 +8,7 @@ def encrypt(plaintext, rot):
     output = ''
     
     for char in plaintext:
-        output += crypto_helper.rotate_character(char, rot)
+        output += helpers.rotate_character(char, rot)
     
     return output
 
@@ -27,16 +27,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# print(alphabet_position('a'))
-# print(alphabet_position('A'))
-# print(alphabet_position('Z'))
-
-# print(rotate_character("A", 13))
-# print(rotate_character("a", 13))
-# print(rotate_character("XYZ", 3))
-
-# print(encrypt("Hello World!", 5))
-# print(encrypt("LaunchCode", 1))
-# print(encrypt("A", 13))
 

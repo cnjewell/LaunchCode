@@ -1,6 +1,6 @@
 # vigenere.py per the "Crytpo" External Assignment
 
-from crypto_helper import alphabet_position, rotate_character, xor_character
+from helpers import alphabet_position, rotate_character, xor_character
 from sys import argv
 
 def encrypt(plaintext, key):
@@ -16,15 +16,15 @@ def encrypt(plaintext, key):
 
     return output
 
-def xor_encrypt(plaintext, key):
-    output = ''
+# def xor_encrypt(plaintext, key):
+#     output = ''
 
-    key_index = 0
-    for char in plaintext:
-        output += xor_character(char, key[key_index])
-        key_index = (key_index + 1) % len(key)
+#     key_index = 0
+#     for char in plaintext:
+#         output += xor_character(char, key[key_index])
+#         key_index = (key_index + 1) % len(key)
 
-    return output
+#     return output
 
 def main():
     if len(argv) != 2:

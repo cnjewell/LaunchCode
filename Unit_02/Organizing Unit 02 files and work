@@ -1,38 +1,34 @@
 Organizing Unit 02 files and work
 
-# CODE FILES
-* FlickList app exercises
-* 
-
-* HTML, CSS and Git notes
-
-/
+/Unit_02/
 	notes.txt
+		HTML
+		CSS
 	scratch.py
-	
-/challenge/
-/assignments/
-	HTML Me Something
-	Web Caesar
-	User Signup
-	Build-a-Blog
-	Blogz
-/exercises/
-	HTML
-	CSS
-	Git
-/studios/
-	FlickList/
-		01 - Initial_app
-		02 - Forms
-		03 - Validation
-		04 - Templates
-		05 - Databases and SQL
-		06 - Object-Relational-Mapping
-		07 - User objects, authentication, relationships
-		08 - MVC Pattern
-		09 - Hashing Passwords
-		10 - Bootstrap
-	Databases/
-		part1
-		part2 
+
+	/challenge/
+	/assignments/
+		HTML Me Something
+		Web Caesar
+		User Signup
+		Build-a-Blog
+		Blogz
+	/exercises/
+		HTML
+		CSS
+		Git
+	/studios/
+		/FlickList/
+			01 - Initial_app
+			02 - Forms
+			03 - Validation
+			04 - Templates
+			05 - Databases and SQL
+			06 - Object-Relational-Mapping
+			07 - User objects, authentication, relationships
+			08 - MVC Pattern
+			09 - Hashing Passwords
+			10 - Bootstrap
+		/Databases/
+			part1
+			part2 

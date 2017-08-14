@@ -138,15 +138,15 @@ def main():
     
     text1 = "Eeeee"
     answer1 = "The text contains 5 alphabetic characters, of which 5 (100.0%) are 'e'."
-    print(analyze_text(text1), answer1)
+    testEqual(analyze_text(text1), answer1)
 
     text2 = "Blueberries are tasteee!"
     answer2 = "The text contains 21 alphabetic characters, of which 7 (33.3333333333%) are 'e'."
-    print(analyze_text(text2), answer2)
+    testEqual(analyze_text(text2), answer2)
 
     text3 = "Wright's book, Gadsby, contains a total of 0 of that most common symbol ;)"
     answer3 = "The text contains 55 alphabetic characters, of which 0 (0.0%) are 'e'."
-    print(analyze_text(text3), answer3)
+    testEqual(analyze_text(text3), answer3)
 
     # print(float(1/3))
 if __name__ == "__main__":

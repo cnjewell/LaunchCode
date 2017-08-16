@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Movies I Have Watched</h2>
+
+<ul>
+
+	{% for movie in watched_movies %}
+	<li>
+		<h3>{{movie}}</h3>
+		<form action="/rating-confirmation" method="post">
+			My Rating:
+			<input type="hidden" name="rated-movie" value="{{ movie }}"/>
+			<select name="movie-rating">
+				<option value="How was it?">How was it?</option>
+				<option value="*****">*****</option>
+				<option value="****">****</option>
+				<option value="***">***</option>
+				<option value="**">**</option>
+				<option value="*">*</option>
+			</select>
+			<input type="submit" value="Rate it!"/>
+		</form>
+	</li>
+	{% endfor %}
+
+</ul>
+
+<!-- # TODO:
+# Make a ratings.html template which lists all movies that have been crossed off.
+# It should have a header of <h2>Movies I Have Watched</h2>
+
+# Add a form for rating EACH list item/movie using a <select> dropdown with the options/values
+# in this list: ["How was it?", "*", "**", "***", "****", "*****"]
+# And with a button that says "Rate It!" to submit the user's rating.
+# Give this form the action of "/rating-confirmation" and the method of post. -->
+
+
+{% endblock %}

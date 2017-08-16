@@ -18,6 +18,6 @@ git remote add origin https://github.com/cnjewell/LaunchCode
 
 git remote -v				verifies new remote
 git push -u origin master	pushes commits to defined remote repository you
-							you speified as the origin
+							you specified as the origin
 
 git reset HEAD YOUR_FILE	Remove a specific file you just 'added'/staged to commit

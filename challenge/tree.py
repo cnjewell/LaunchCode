@@ -10,39 +10,57 @@ class TreeNode:
         self.left = None
         self.right = None
 
-    def get_list(self):
-        """ Returns list of tree values """
-        # use recursion
-        if self.left is not None:
-            left = self.get_list(self.left)
+def get_list(root):
+    """ Returns list of tree values """
+    
+    if root.left is not None:
+        left = get_list(root.left)
+    else:
+        left = []
+
+    if root.right is not None:
+        right = get_list(root.right)
+    else:
+        right = []
+
+    return left + [root.val] + right
+
+
+def insert(root, val):
+    """ Insert val in root """ 
+    
+    if val > root.val:
+        if root.right is not None:
+            insert(root.right, val)
         else:
-            left = []
-
-        if self.right is not None:
-            right = self.get_list(self.right)
+            root.right = TreeNode(val)
+    
+    elif val < root.val:
+        if root.left is not None:
+            insert(root.left, val)
         else:
-            right = []
+            root.left = TreeNode(val)
+    
+    elif val == root.val:
+        return None
 
-        return left + [self.val] + right
 
+def tree_search(root, val):
+    """ Returns True if val in is tree """
+    if root.val == val:
+        return True
+    elif root.left is not None:
+        tree_search(root.left, val)
+    elif root.right is not None:
+        tree_search(root.right, val)
+    else:
+        return False
 
-    def insert(self, val):
-        # Insert node in tree where 
-        if val > root.val:
-            if root.right is not None:
-                insert(root.right, val)
-            else:
-                root.right = TreeNode(val)
-        elif val < root.val:
-            if root.left is not None:
-                insert(root.left, val)
-            else:
-                root.left = TreeNode(val)
-        elif val == root.val:
-            return None
+    
 
-    def remove():
-        pass
+def remove(root, val):
+    pass
+
 
 def main():
 
@@ -52,7 +70,23 @@ def main():
     root.left = TreeNode(3)
     root.right = TreeNode(7)
 
-    # print(root.get_list())
+    print(get_list(root))
+
+    insert(root, 9)
+    print(get_list(root))
+    insert(root, 1)
+    print(get_list(root))
+    insert(root, 6)
+    print(get_list(root))
+    insert(root, 8)
+    print(get_list(root))
+    insert(root, 2)
+    print(get_list(root))
+    insert(root, 4)
+    print(get_list(root))
+
+    print(tree_search(root, 2))
+    print(tree_search(root, 10))
 
 if __name__ == "__main__":
     main()

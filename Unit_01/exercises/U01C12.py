@@ -4,7 +4,6 @@ from test import testEqual
 from itertools import combinations
 
 class Point:
-
     def __init__(self, init_x, init_y):
         """ Create a new point at the given coordinates. """
         self.x = init_x
@@ -33,6 +32,7 @@ class Point:
     def move(self, dx, dy):         
         self.x += dx
         self.y += dy
+    
     def __repr__(self):
         return "x=" + str(self.x) + ", y=" + str(self.y)
 
@@ -127,83 +127,88 @@ class BoredChatbot(Chatbot):
         else:
             return Chatbot.response(self, prompt_from_human)
 
+def main():
+    # sally = BoredChatbot("Sally")
 
-sally = BoredChatbot("Sally")
+    # human_message = input(sally.greeting())
 
-human_message = input(sally.greeting())
+    # print(sally.response(human_message))
 
-print(sally.response(human_message))
+        # p = Point(0,50)
+    # # q = Point(10,10)
+    # # print(p.distance_from_point(q))
+
+    # # p.reflect_x()
+    # # print(p)
+
+    # print(p.slope_from_origin())
+    # p.move(5, 5)
+    # print(p)
+    # print(p.slope_from_origin())
+
+    # r = Rectangle(Point(100,50), 5, 10)
+    # print(r.width)
+    # print(r.height)
+    # r.transpose()
+    # print(r.width)
+    # print(r.height)
+
+    # r = Rectangle(Point(0, 0), 10, 5)
+    # testEqual(r.contains(Point(0, 0)), True)
+    # testEqual(r.contains(Point(3, 3)), True)
+    # testEqual(r.contains(Point(3, 7)), False)
+    # testEqual(r.contains(Point(3, 5)), False)
+    # testEqual(r.contains(Point(3, 4.99999)), True)
+    # testEqual(r.contains(Point(-3, -3)), False)
+
+    # r = Rectangle(Point(0, 0), 10, 5)
+    # testEqual(r.diagonal(), 11.1803398875)
+
+    # r1 = Rectangle(Point(0,0), 12, 4)
+    # testEqual(r1.diagonal(), 12.6491106407)
+
+    # r2 = Rectangle(Point(0,0), 1,2)
+    # testEqual(r2.diagonal(), 2.2360679775)
+
+    r1 = Rectangle(Point(0,0), 1,2)
+    r2 = Rectangle(Point(0,0), 1,2)
+    testEqual(r1.collision_detected(r2), True)
+    r1 = Rectangle(Point(0,1), 2,2)
+    r2 = Rectangle(Point(1,0), 2,2)
+    testEqual(r1.collision_detected(r2), True)
+    r1 = Rectangle(Point(5,5), 2,2)
+    r2 = Rectangle(Point(0,1), 2,2)
+    testEqual(r1.collision_detected(r2), False)
+    r1 = Rectangle(Point(0,0), 2,2)
+    r2 = Rectangle(Point(2,2), 2,2)
+    testEqual(r1.collision_detected(r2), True)
+    r1 = Rectangle(Point(0,0), 2,2)
+    r2 = Rectangle(Point(-2,-2), 2,2)
+    testEqual(r1.collision_detected(r2), True)
+    r1 = Rectangle(Point(0,0), 2,2)
+    r2 = Rectangle(Point(3,0), 2,2)
+    testEqual(r1.collision_detected(r2), False)
+    r1 = Rectangle(Point(0,0), 2,2)
+    r2 = Rectangle(Point(2,0), 2,2)
+    testEqual(r1.collision_detected(r2), True)
+    r1 = Rectangle(Point(0,0), 2,2)
+    r2 = Rectangle(Point(-1,1), 2,2)
+    testEqual(r1.collision_detected(r2), True)
+    r1 = Rectangle(Point(0,0), 2,2)
+    r2 = Rectangle(Point(1,1), 2,2)
+    testEqual(r1.collision_detected(r2), True)
+    r1 = Rectangle(Point(0,0), 2,2)
+    r2 = Rectangle(Point(-1,-1), 2,2)
+    testEqual(r1.collision_detected(r2), True)
+    r1 = Rectangle(Point(0,0), 2,2)
+    r2 = Rectangle(Point(-1,-1), 4,4)
+    testEqual(r1.collision_detected(r2), True)
+    r1 = Rectangle(Point(-1,-1), 4,4)
+    r2 = Rectangle(Point(0,0), 2,2)
+    testEqual(r1.collision_detected(r2), True)
+
+if __name__ == "__main__":
+    main()
         
 
-# p = Point(0,50)
-# # q = Point(10,10)
-# # print(p.distance_from_point(q))
 
-# # p.reflect_x()
-# # print(p)
-
-# print(p.slope_from_origin())
-# p.move(5, 5)
-# print(p)
-# print(p.slope_from_origin())
-
-# r = Rectangle(Point(100,50), 5, 10)
-# print(r.width)
-# print(r.height)
-# r.transpose()
-# print(r.width)
-# print(r.height)
-
-# r = Rectangle(Point(0, 0), 10, 5)
-# testEqual(r.contains(Point(0, 0)), True)
-# testEqual(r.contains(Point(3, 3)), True)
-# testEqual(r.contains(Point(3, 7)), False)
-# testEqual(r.contains(Point(3, 5)), False)
-# testEqual(r.contains(Point(3, 4.99999)), True)
-# testEqual(r.contains(Point(-3, -3)), False)
-
-# r = Rectangle(Point(0, 0), 10, 5)
-# testEqual(r.diagonal(), 11.1803398875)
-
-# r1 = Rectangle(Point(0,0), 12, 4)
-# testEqual(r1.diagonal(), 12.6491106407)
-
-# r2 = Rectangle(Point(0,0), 1,2)
-# testEqual(r2.diagonal(), 2.2360679775)
-
-# r1 = Rectangle(Point(0,0), 1,2)
-# r2 = Rectangle(Point(0,0), 1,2)
-# testEqual(r1.collision_detected(r2), True)
-# r1 = Rectangle(Point(0,1), 2,2)
-# r2 = Rectangle(Point(1,0), 2,2)
-# testEqual(r1.collision_detected(r2), True)
-# r1 = Rectangle(Point(5,5), 2,2)
-# r2 = Rectangle(Point(0,1), 2,2)
-# testEqual(r1.collision_detected(r2), False)
-# r1 = Rectangle(Point(0,0), 2,2)
-# r2 = Rectangle(Point(2,2), 2,2)
-# testEqual(r1.collision_detected(r2), True)
-# r1 = Rectangle(Point(0,0), 2,2)
-# r2 = Rectangle(Point(-2,-2), 2,2)
-# testEqual(r1.collision_detected(r2), True)
-# r1 = Rectangle(Point(0,0), 2,2)
-# r2 = Rectangle(Point(3,0), 2,2)
-# testEqual(r1.collision_detected(r2), False)
-# r1 = Rectangle(Point(0,0), 2,2)
-# r2 = Rectangle(Point(2,0), 2,2)
-# testEqual(r1.collision_detected(r2), True)
-# r1 = Rectangle(Point(0,0), 2,2)
-# r2 = Rectangle(Point(-1,1), 2,2)
-# testEqual(r1.collision_detected(r2), True)
-# r1 = Rectangle(Point(0,0), 2,2)
-# r2 = Rectangle(Point(1,1), 2,2)
-# testEqual(r1.collision_detected(r2), True)
-# r1 = Rectangle(Point(0,0), 2,2)
-# r2 = Rectangle(Point(-1,-1), 2,2)
-# testEqual(r1.collision_detected(r2), True)
-# r1 = Rectangle(Point(0,0), 2,2)
-# r2 = Rectangle(Point(-1,-1), 4,4)
-# testEqual(r1.collision_detected(r2), True)
-# r1 = Rectangle(Point(-1,-1), 4,4)
-# r2 = Rectangle(Point(0,0), 2,2)
-# testEqual(r1.collision_detected(r2), True)

@@ -15,19 +15,19 @@
 # F     = 0.00  = 
 
 # grades 100 - 65 maps to 4.00 to 0.00
-def linear_conversion(old_value, old_min, old_max, new_min, new_max):
-    '''Maps old_value within a new range'''
-    old_range = (old_max - old_min)
-    new_range = (new_max - new_min)
-    return (((old_value - old_min) * new_range) / old_range) + new_min
+# def linear_conversion(old_value, old_min, old_max, new_min, new_max):
+#     '''Maps old_value within a new range'''
+#     old_range = (old_max - old_min)
+#     new_range = (new_max - new_min)
+#     return (((old_value - old_min) * new_range) / old_range) + new_min
 
-grade = 98
-print(round(linear_conversion(grade, 65, 100, 0, 4), 2))
+# grade = 98
+# print(round(linear_conversion(grade, 65, 100, 0, 4), 2))
 
-def earned_credits(grade):
-    return round(linear_conversion(grade, 65, 100, 0, 4), 2)
+# def earned_credits(grade):
+#     return round(linear_conversion(grade, 65, 100, 0, 4), 2)
 
-print(earned_credits(grade))
+# print(earned_credits(grade))
 
 # grades - Must include a way to translate percent grades to grade points
 # attempted credit hours = len(grades) * 3
@@ -37,3 +37,14 @@ print(earned_credits(grade))
 # GPA is complicated...
 
 # Grade percentage for course mapped to 4.00 point range * 3 credit hours = earned grade points
+
+example = {'a' : 1, 'b':2}
+print(example)
+example_as_list = list(example)
+print(example_as_list)
+k = 1
+v = (2, 3)
+# c = tuple([k, v[0], v[1]])
+c = (k, v[0], v[1])
+
+print(c)

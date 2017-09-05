@@ -70,6 +70,7 @@ def main():
 
     freud_contacts = {"Horney, Karen": ("1-541-656-3010", "karen@psychoanalysis.com"), "Welles, Orson": ("1-312-720-8888", "orson@notlive.com"), "Freud, Anna": ("1-541-754-3010", "anna@psychoanalysis.com")}
     print(sort_contacts(freud_contacts))
+    
     print(sort_contacts({"Horney, Karen": ("1-541-656-3010", "karen@psychoanalysis.com"),
         "Welles, Orson": ("1-312-720-8888", "orson@notlive.com"),
         "Freud, Anna": ("1-541-754-3010", "anna@psychoanalysis.com")}) == [('Freud, Anna', '1-541-754-3010',
@@ -88,6 +89,8 @@ def main():
         'pedro@filmbuffs.com'), ('Kandinsky, Wassily', '1-333-555-9999', 'kandinsky@painters.com'),
         ('Rimbaud, Arthur', '1-636-555-5555', 'arthur@notlive.com'), ('Swinton, Tilda',
         '1-917-222-2222', 'tilda@greatActors.com')])
+
+    print(sorted(freud_contacts))
 
 if __name__ == "__main__":
     main()

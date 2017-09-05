@@ -47,19 +47,49 @@ def insert(root, val):
 
 def tree_search(root, val):
     """ Returns True if val in is tree """
+    
     if root.val == val:
         return True
-    elif root.left is not None:
-        tree_search(root.left, val)
-    elif root.right is not None:
-        tree_search(root.right, val)
-    else:
+
+    elif root.left == None and root.right == None:
         return False
 
+    else:
+        if root.left  is not None:
+            return tree_search(root.left,  val)
+
+        if root.right is not None:
+            return tree_search(root.right, val)
     
 
 def remove(root, val):
-    pass
+    """ Remove val from TreeNode root. Return None if val is not in tree. """
+    # first, is val even in this tree? If not, return None
+
+    # find the TreeNode in this tree that has the cargo 'val'
+    # once you find that TreeNode, 
+        # Set the upstream node's left/right to None
+        # Take the clipped TreeNode and for each connected node, insert their cargoes into root
+            # Do not include the clipped TreeNode's cargo in that run of insertions
+
+    # base case(s)
+        # Only 1 TreeNode equal to the value, return error?
+            # no last_tree
+        # Only 2 last_tree, this_tree
+    
+    first_pass = False
+    if first_pass:
+
+        if not tree_search(root, val):
+            return None
+    
+        if root.val == val:
+            return None
+        
+
+
+
+
 
 
 def main():
@@ -85,8 +115,17 @@ def main():
     insert(root, 4)
     print(get_list(root))
 
+    print()
+    print(tree_search(root, 5))
     print(tree_search(root, 2))
     print(tree_search(root, 10))
+
+    tree2 = TreeNode(3)
+    print(tree_search(tree2, 5))
+
+    print()
+
+    print(get_list(root))
 
 if __name__ == "__main__":
     main()

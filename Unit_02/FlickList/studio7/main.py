@@ -52,22 +52,48 @@ def get_watched_movies():
 # TODO 3: Add "/login" GET and POST routes.
 # TODO 4: Create login template with username and password.
 #         Notice that we've already created a 'login' link in the upper-right corner of the page that'll connect to it.
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        user = User.query.filter_by(email=email).first()
+        if user and user.password == password:
+            session['email'] = email
+            flash("Logged in")
+            print(session)
+            return redirect('/')
+        else:
+            flash("User not registered or password incorrect")
+
+    return render_template("login.html")
+
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
+        verify = request.form['verify']
         if not is_email(email):
-            flash('zoiks! "' + email + '" does not seem like an email address')
+            flash('zoiks! "' + email + '" does not seem like an email address!')
             return redirect('/register')
-        # TODO 1: validate that form value of 'verify' matches password
+        if password != verify:
+            flash('Jinkies! You entered two different passwords!')
+            return redirect('/register')
+        # TODO 1: validate that form value of 'verify' matches password  DONE
         # TODO 2: validate that there is no user with that email already
-        user = User(email=email, password=password)
-        db.session.add(user)
-        db.session.commit()
-        session['user'] = user.email
-        return redirect("/")
+        existing_user = User.query.filter_by(email=email).first()
+        if not existing_user:
+            user = User(email=email, password=password)
+            db.session.add(user)
+            db.session.commit()
+            session['user'] = user.email
+            return redirect("/")
+        else:
+            flash('Duplicate User. Sorry!')
+            return redirect("/register")
     else:
         return render_template('register.html')
 
@@ -160,7 +186,8 @@ def index():
 #         It should contain 'register' and 'login'.
 @app.before_request
 def require_login():
-    if not ('user' in session or request.endpoint == 'register'):
+    allowed_routes = ['login', 'register']    
+    if request.endpoint not in allowed_routes and 'user' not in session: 
         return redirect("/register")
 
 # In a real application, this should be kept secret (i.e. not on github)

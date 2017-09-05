@@ -1,0 +1,66 @@
+Notes on Unit 2
+
+Git Cloning 
+Git Branching
+
+User Login
+User Registration
+	* check email format for vaild email address
+	* check if email is already in db
+	* check if password matches pw verify field
+
+Hash Utilities
+	* hash and salt pw before storing in db on register
+	* retrieve hash and salt to check pw on login
+
+Session Management
+	* before_request, check for user in session dict
+	* on login, add user to session dict 
+	* on logout, del user from session dict
+
+
+
+Flash Messages
+	* pass error messages into the flash dict with flash()
+	* setup display of flash messages in respective templates
+
+
+
+Handling User Content Creation
+HTML Forms
+	* access the '?' query strings in URLs through Flask's request.args.get()
+
+	* access the information POSTed with forms via request.form[]
+	* the <input> tags 'name' attribute is the key in request.form[]
+	* also available, <select> and <textarea>
+	* HTML escape user input to prevent injections
+		* Some areas of flask are auto-escaped
+		* the cgi module of python can be used wherever needed
+
+Validating New User Content
+	* Handle form fields with no input
+	* Handle blacklisted types (i.e. terrible movies)
+
+Displaying Content
+	* query the db to build query-object full of objects (ie mvovies)
+	* pass information into render_template()
+	* render queried objects with jinja for loops, access object fields to displat (ie. movie.name)
+
+
+
+Databases
+Object Relational Mapping
+
+Foreign Keys
+	* A Foreign Key links objects, but I'm currently unsure of how that differs from relationship(backref='')...
+		* ForeignKey() ...
+		* db.relationship(backref='') ...
+
+
+*** To Research ***
+
+* Migrations
+* Django's {% url 'url-name' %} feature in flask?
+* Flask regex url routes similar to Django, how do I use?
+
+

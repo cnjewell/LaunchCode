@@ -1,0 +1,39 @@
+Unit 02 Mega Assignment
+
+
+
+USER class
+	* id (PK)
+	* email
+	* pw-hash-salt
+login
+logout
+register
+registration confirmation
+error flash messages
+field validation functions
+Hash utilities
+
+POST class 
+(blog posts)
+	* id
+	* user (FK)
+	* title
+	* body
+	* datetime (optional)
+edit post
+publish confirmation
+delete post
+
+
+
+Base Template
+	Header
+		* user.name Logout link
+		* create post link
+
+	Footer
+		* created by Christopher Jewell
+
+	index
+		* posts by most recent

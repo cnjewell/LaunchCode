@@ -1,6 +1,11 @@
 Unit 02 Mega Assignment
 
-
+Requirements
+	* caesar
+	* user signup
+		* validate input
+	* build-a-blog
+	* blogz
 
 USER class
 	* id (PK)
@@ -35,5 +40,5 @@ Base Template
 	Footer
 		* created by Christopher Jewell
 
-	index
-		* posts by most recent
+Index
+	* posts by most recent

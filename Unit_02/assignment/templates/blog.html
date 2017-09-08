@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <h2>Blog Posts</h2>
+  {% if postlist %}
+    {% for post in postlist %}
+      <article>
+        <h3><a href='/blog?id={{post.id}}'>{{ post.title }}</a></h3>
+        <p>{{ post.body }}</p>
+      </article>
+      <hr/>
+    {% endfor %}
+  {% endif %}
+  
+{% endblock %}

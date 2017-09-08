@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Unit 02 - All Assignments</title>
+    </head>
+
+	<body>
+
+	<!-- nav, including login/register, welcome user, logout, blog, new blog post, caesar, wuwei -->
+  <h1>The Nav bar will go here</h1>
+
+	{% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+  <a href='/logout'>Logout</a>
+
+    {% block content %}
+    {% endblock %}
+
+	</body>
+
+</html>

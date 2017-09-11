@@ -1,17 +1,12 @@
-from flask import request, redirect, render_template, session, flash
 from app import app, db
-from models import User, Post
+from flask import request, redirect, render_template, session, flash
 from werkzeug.routing import BaseConverter
-from hashutils import check_pw_hash, make_salt, make_pw_hash
 import cgi, re
+
+
+from models import User, Post
+from hashutils import check_pw_hash, make_salt, make_pw_hash
 import caesar
-
-###############################################
-############### GENERAL TODOS #################
-###############################################
-
-# TODO: Update validation errors to mark form fields as well as a flash message
-# TODO: Move RegexConverter to app.py after I'm used to setting up regex routes
 
 ###############################################
 ############## ROUTING HELPER #################
@@ -20,14 +15,15 @@ import caesar
 # For regex routing
 # Found on StackOverflow
 
+# TODO: Move RegexConverter to app.py after I'm used to setting up regex routes
+
 class RegexConverter(BaseConverter):
     def __init__(self, url_map, *items):
         super(RegexConverter, self).__init__(url_map)
         self.regex = items[0]
 
 app.url_map.converters['regex'] = RegexConverter
-
-
+         
 # EXAMPLE #
 
 # @app.route('/<regex("[abcABC0-9]{4,6}"):uid>-<slug>/')
@@ -42,13 +38,12 @@ app.url_map.converters['regex'] = RegexConverter
 ################## USER AUTH ##################
 ###############################################
 
-login_not_needed = ['login', 'register', 'blog', 'wuwei', 'web_caesar']
-# TODO: Sessions were acting up on me. Including the logout route helped. Diagnose
-# login_not_needed = ['login', 'register', 'blog', 'wuwei', 'web_caesar', 'logout']
+login_needed = ['newpost', 'logout']
 
 @app.before_request
 def require_login():
-    if not ('user' in session or request.endpoint in login_not_needed):
+    if ('user' not in session or request.endpoint in login_needed):
+        flash('Login required to access certain pages.', category='error')
         return redirect("/login")
 
 def logged_in_user():
@@ -77,7 +72,8 @@ def login():
             flash('Error: One or more fields left blank', category="error")
             return redirect('/register')
 
-        # TODO : test this works properly, I'm skeptical
+        # TODO : Test this works properly, I'm skeptical
+
         users = User.query.filter_by(email=email)
         if users.count() != 1:
             flash('Error: Bad username or password', category="error")
@@ -145,6 +141,7 @@ def register():
         flash('Successfully registered, '+user.email, category="message")
         return redirect("/")
 
+
 @app.route("/logout")
 def logout():
     user = session['user']
@@ -159,37 +156,64 @@ def logout():
 ###############################################
 
 # TODO: BLOGZ reqs
-    # 1 - posts by author page
-    # 2 - author listed in posts
-    # 3 - link to posts-by-author from post
-    # 4 - link to registration form login page
+    # Usernames
+    # - add username to User model
+    # - add username to /registration view
+    # - validate usernames:
+        # - are not empty strings
+        # - are greater than 3 characters
+        # - alpha-numeric, hyphens, underscores
+    # - refactor username into templates where email was used before
+    # - reinitalize database for updated User model
 
-# TODO: IF I WANT BLOG/USER IN URL
-    # - add username to User object.
-    # - recreate tables for User.
-    # - add username to registration view-func
-    # - add username to reg.html form
+    # Authors
+    # - posts by author page
+    # - authors.html, list of all the authors
+    # - Include author's username in all posts by that author
+    # - Author's name links to post-by-author page, add to templates
 
-@app.route("/blog")
-def blog():
-    
-    post_id = request.args.get("id")
+    # Posts
+    # - post title links to individual post in templates
+    # - add DateTime to Post model
+        # - add datetime to templates displaying posts
+        # - reinitalize database for updated Post model
+
+# TODO: /blog                   display all authors
+# TODO: /blog/username          display all posts by single author, pagination included
+# TODO: /blog/posts             display all posts, pagination included
+# TODO: /blog/posts/post_id     display a single post
+
+@app.route("/blog", methods=['GET'])
+@app.route("/blog/<username>", methods=['GET'])
+def blog(username=None):
+    # TODO: Sanitize <username> else risk a SQL injection! GAH! 
+    if username:
+        # TODO: Wait! This query is wrong. I need to change the model relationships I think.
+        postlist = Post.query.filter_by(owner=username).all()
+        return render_template("blog.html", postlist=postlist)
+    else:
+        authors = User.query.all()
+        return render_template("authors.html", authors=authors)
+
+
+@app.route('/blog/posts/', methods=['GET'])
+@app.route('/blog/posts/<int:post_id>', methods=['GET'])
+def blog_posts(post_id=None):
     if post_id:
         postlist = Post.query.filter_by(id=post_id).all()
     else:
         postlist = Post.query.order_by(Post.id.desc()).all()
-        # TODO (limit this query.all() somehow... Include pagination?)
     return render_template("blog.html", postlist=postlist)
 
 
-@app.route("/newpost", methods=['GET', 'POST'])
+@app.route("/blog/newpost", methods=['GET', 'POST'])
 def newpost():
     if request.method == "GET":
         return render_template("newpost.html", title='', body='')
     
     if request.method == "POST":
         
-        # TODO: Implement slugs and slugifier
+        # TODO: Implement slugs and slugifier?
 
         title = request.form['title']
         body = request.form['body']

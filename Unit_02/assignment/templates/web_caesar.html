@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 
+
 <form action="/web_caesar" method="post">
+	<br>
 	<label>Rotate by:
 		<input type="text" name="rot" value="{{rot}}"/>
 	</label>
 	<br>
 
+	<br>
 	<label>Enter Text:<br>
 		<textarea name="text">{{text}}</textarea>
 	</label>

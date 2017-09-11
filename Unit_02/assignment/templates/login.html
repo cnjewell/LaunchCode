@@ -2,10 +2,26 @@
 {% block content %}
 
 <h2>Login</h2>
-<form action="/login" method="post">
-  <p><label>Email<input type="text" name="email"/></label></p>
-  <p><label>Password<input type="password" name="password"/></label></p>
-  <p><input type="submit" value="Login"/></p>
-</form>
+
+<table>
+	<form action="/login" method="post">
+	  
+	  <tr>
+	  	<td><label for="email_field">Email</label></td>
+	  	<td><input type="text" id="email_field" name="email"/></td>
+	  </tr>
+	  
+	  <tr>
+	  	<td><label for="password_field">Password</label></td>
+	  	<td><input type="password" id="password_field" name="password"/></td>
+	  </tr>
+	  
+	  <tr>
+	  	<td><input type="submit" value="Login"/></td>
+	  </tr>
+	</form>
+</table>
+
+<p>New user? <a href='/register'>Register here!</a></p>
 
 {% endblock %}

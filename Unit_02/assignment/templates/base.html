@@ -7,8 +7,23 @@
 
 	<body>
 
-	<!-- nav, including login/register, welcome user, logout, blog, new blog post, caesar, wuwei -->
+	<!-- TODO: create nav, including:
+  
+  * Logged out: 
+    *login/register
+  
+  * Logged in: 
+    * "welcome user!" and logout
+    * link to new blog post
+
+  -->
+
   <h1>The Nav bar will go here</h1>
+  <a href="/">Home</a>
+  <a href="/blog">Blog</a>
+  <a href="/web_caesar">Caesar</a>
+  <a href="/wuwei">Wu Wei</a>
+  <a href='/logout'>Logout</a>
 
 	{% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -20,11 +35,13 @@
     {% endif %}
   {% endwith %}
 
-  <a href='/logout'>Logout</a>
 
     {% block content %}
     {% endblock %}
 
+    <br>
+    <!-- TODO: Create footer in base template -->
+    <footer>~ Launchcode Unit 2 Assignments - Completed by Christopher Jewell ~</footer>
 	</body>
 
 </html>

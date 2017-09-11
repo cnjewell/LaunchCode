@@ -2,11 +2,31 @@
 {% block content %}
 
 <h2>Register New Account</h2>
+
+<table>
 <form action="/register" method="post">
-  <p><label>Email <input type="text" name="email"/></label></p>
-  <p><label>New Password <input type="password" name="password"/></label></p>
-  <p><label>Verify Password <input type="password" name="verify"/></label></p>
-  <p><input type="submit" value="Register"/></p>
+  
+  <tr>
+  	<td><label for="email_field">Email </label></td>
+  	<td><input type="text" id="email_field" name="email"/></td>
+  </tr>
+  
+  <tr>
+  	<td><label for="password_field">New Password </label></td>
+  	<td><input type="password" id="password_field" name="password"/></td>
+  </tr>
+  
+  <tr>
+  	<td><label for="verification_field">Verify Password </label></td>
+  	<td><input type="password" id="verification_field" name="verify"/></td>
+  </tr>
+  
+  <tr>
+  	<td><input type="submit" value="Register"/></td>
+  </tr>
+
 </form>
+</table>
+
 
 {% endblock %}

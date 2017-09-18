@@ -3,11 +3,13 @@ from app import db
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True)
+    username = db.Column(db.String(120), unique=True)
     pw_hash = db.Column(db.String(120))
     posts = db.relationship('Post', backref='owner')
 
-    def __init__(self, email, pw_hash):
+    def __init__(self, email, username, pw_hash):
         self.email = email
+        self.username = username
         self.pw_hash = pw_hash
 
     def __repr__(self):

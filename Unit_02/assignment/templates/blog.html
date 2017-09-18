@@ -5,7 +5,7 @@
   {% if postlist %}
     {% for post in postlist %}
       <article>
-        <h3><a href='/blog?id={{post.id}}'>{{ post.title }}</a></h3>
+        <h3><a href='/blog/posts/{{post.id}}'>{{ post.title }}</a></h3>
         <p>{{ post.body }}</p>
       </article>
       <hr/>

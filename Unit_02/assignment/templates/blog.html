@@ -9,7 +9,7 @@
       <article>
         <h3><a href='/blog/posts/{{ post[0].id }}'>{{ post[0].title }}</a></h3>
         <p>{{ post[0].body }}</p>
-        <p>~Written by <a href='/blog/posts/{{ post[1].username }}'>{{ post[1].username }}</a></p>
+        <p>~Written by <a href='/blog/{{ post[1].username }}'>{{ post[1].username }}</a></p>
       </article>
       <hr/>
     {% endfor %}

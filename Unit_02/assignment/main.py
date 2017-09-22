@@ -60,7 +60,7 @@ def login():
 
         users = User.query.filter_by(email=email)
         if users.count() != 1:
-            flash('Error: Bad username or password', category="error")
+            flash('Error: Email not in our system.', category="error")
             return redirect("/login")            
 
         user = users.first()        
@@ -68,7 +68,7 @@ def login():
         test_pw_hash, salt = make_pw_hash(password, salt).split(',')
 
         if test_pw_hash != pw_hash:
-            flash('Error: Bad username or password', category="error")
+            flash('Error: Incorrect password', category="error")
             return redirect("/login")     
         
         # SUCCESS # 
@@ -137,7 +137,7 @@ def register():
         return redirect("/")
 
 
-@app.route("/logout")
+@app.route("/logout", methods=[ 'POST'])
 def logout():
     user = session['user']
     del session['user']
@@ -180,22 +180,11 @@ def logout():
 # TODO: /blog/posts             display all posts, pagination included
 # TODO: /blog/posts/post_id     display a single post
 
-    # New queries for posts inclduing username 
-    # all posts
-    # posts by id
-    # postlist = db.session.query(Post, User).join(User).filter_by(id=post_id).all()
-
-    
-    # posts by author
-    # postlist = db.session.query(Post, User).join(User).filter_by(username=username).first()
-
-
 @app.route("/blog", methods=['GET'])
 @app.route("/blog/<username>", methods=['GET'])
 def blog(username=None):
     
     if is_valid_username(username):
-        
         
         author = User.query.filter_by(username=username).first()
 
@@ -223,7 +212,7 @@ def blog_posts(url_post_id=None):
         return render_template("blog.html", postlist=postlist)    
     
     else:
-        postlist = db.session.query(Post, User).join(User).all()
+        postlist = db.session.query(Post, User).join(User).order_by(Post.id.desc()).all()
     
     return render_template("blog.html", postlist=postlist)
 
@@ -245,7 +234,7 @@ def newpost():
         db.session.add(new_post)
         db.session.commit()
         flash("Success: New blog post published.", category="message")
-        return render_template('blog.html', postlist=Post.query.filter_by(id=new_post.id).all())
+        return render_template('blog.html', postlist=db.session.query(Post, User).join(User).filter(Post.id == new_post.id).all())
 
 
 

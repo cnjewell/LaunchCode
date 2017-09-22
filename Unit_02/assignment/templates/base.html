@@ -7,22 +7,30 @@
 
 	<body>
 
-	<!-- TODO: create nav, including:
-  
-  * Logged out: 
-    *login/register
-  
-  * Logged in: 
-    * "welcome user!" with user name and logout
-    * blog/newpost
+  <!-- TODO: change from inline style to css sheet later. -->
+  <div style='float: right'>
+    {% if 'user' in session %}
+      {{ session['user'] }}
+      <form action="/logout" method="post" id='logout'>
+        <input type="submit" value="Log Out" />
+      </form>
+    {% else %}
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
 
-  -->
+    {% endif %}
+  </div>
 
-  <h1>The Nav bar will go here</h1>
+  <h1>Unit 2 - Blog App Assignments</h1>
   <a href="/">Home</a>
-  <a href="/blog">Blog</a>
   <a href="/web_caesar">Caesar</a>
-  <a href='/logout'>Logout</a>
+  <a href="/blog">Authors</a>
+  <a href="/blog/posts">All Posts</a> 
+  {% if 'user' in session %}
+  <a href="/blog/newpost">New Post</a>
+  {% endif %}
+  
+
 
 	{% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -39,7 +47,6 @@
     {% endblock %}
 
     <br>
-    <!-- TODO: Create footer in base template -->
     <footer>~ Launchcode Unit 2 Assignments - Completed by Christopher Jewell ~</footer>
 	</body>
 

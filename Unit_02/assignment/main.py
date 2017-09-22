@@ -180,35 +180,59 @@ def logout():
 # TODO: /blog/posts             display all posts, pagination included
 # TODO: /blog/posts/post_id     display a single post
 
+    # New queries for posts inclduing username 
+    # all posts
+    # posts by id
+    # postlist = db.session.query(Post, User).join(User).filter_by(id=post_id).all()
+
+    
+    # posts by author
+    # postlist = db.session.query(Post, User).join(User).filter_by(username=username).first()
+
+
 @app.route("/blog", methods=['GET'])
 @app.route("/blog/<username>", methods=['GET'])
 def blog(username=None):
     
     if is_valid_username(username):
         
+        
         author = User.query.filter_by(username=username).first()
+
         if not author:
             flash('Error: Requested username not in database.', category="error")
             return redirect("/blog")
 
-        postlist = author.posts
+        # postlist = author.posts
+        # postlist = db.session.query(Post, User.username).\
+        #     filter(User.username == username).all()
+        postlist = db.session.query(Post, User).join(User).filter(User.username == username).all()
         return render_template("blog.html", postlist=postlist)
+
     else:
         authors = User.query.all()
         return render_template("authors.html", authors=authors)
 
 
 @app.route('/blog/posts', methods=['GET'])
-@app.route('/blog/posts/<int:post_id>', methods=['GET'])
-def blog_posts(post_id=None):
-    if post_id:
-        postlist = Post.query.filter_by(id=post_id).all()
+@app.route('/blog/posts/<int:url_post_id>', methods=['GET'])
+def blog_posts(url_post_id=None):
+    
+    if url_post_id:
+        # postlist = Post.query.filter_by(id=url_post_id).all()
+        # postlist = db.session.query(Post, User.username).\
+            # filter(Post.id == url_post_id).all()
+        postlist = db.session.query(Post, User).join(User).filter(Post.id == url_post_id).all()
         if not postlist:
             flash('Error: Requested post not in database.', category="error")
             return redirect("/blog/posts")
         return render_template("blog.html", postlist=postlist)    
+    
     else:
-        postlist = Post.query.order_by(Post.id.desc()).all()
+        # postlist = Post.query.order_by(Post.id.desc()).all()  # old version
+        # postlist = db.session.query(Post, User.username).order_by(Post.id.desc())  #doesn't work...
+        postlist = db.session.query(Post, User).join(User).all()
+    
     return render_template("blog.html", postlist=postlist)
 
 

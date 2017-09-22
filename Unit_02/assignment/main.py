@@ -166,8 +166,8 @@ def logout():
     # Authors (User.username)
     # * posts by author page
     # * authors.html, list of all the authors
-    # - Include author's username in all posts by that author
-    # - Author's name links to post-by-author page, add to templates
+    # * Include author's username in all posts by that author
+    # * Author's name links to post-by-author page, add to templates
 
     # Posts
     # * post title links to individual post in templates
@@ -203,9 +203,6 @@ def blog(username=None):
             flash('Error: Requested username not in database.', category="error")
             return redirect("/blog")
 
-        # postlist = author.posts
-        # postlist = db.session.query(Post, User.username).\
-        #     filter(User.username == username).all()
         postlist = db.session.query(Post, User).join(User).filter(User.username == username).all()
         return render_template("blog.html", postlist=postlist)
 
@@ -219,9 +216,6 @@ def blog(username=None):
 def blog_posts(url_post_id=None):
     
     if url_post_id:
-        # postlist = Post.query.filter_by(id=url_post_id).all()
-        # postlist = db.session.query(Post, User.username).\
-            # filter(Post.id == url_post_id).all()
         postlist = db.session.query(Post, User).join(User).filter(Post.id == url_post_id).all()
         if not postlist:
             flash('Error: Requested post not in database.', category="error")
@@ -229,8 +223,6 @@ def blog_posts(url_post_id=None):
         return render_template("blog.html", postlist=postlist)    
     
     else:
-        # postlist = Post.query.order_by(Post.id.desc()).all()  # old version
-        # postlist = db.session.query(Post, User.username).order_by(Post.id.desc())  #doesn't work...
         postlist = db.session.query(Post, User).join(User).all()
     
     return render_template("blog.html", postlist=postlist)

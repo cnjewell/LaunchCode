@@ -97,33 +97,33 @@ def register():
 
         if email == '' or username == '' or password == '' or verify == '':
             flash('Error: One or more fields left blank', category="is-warning")
-            return redirect('/register')
+            return render_template("register.html", email=email, username=username)
 
         if not is_email(email):
             flash('Error: Entered email is not formatted like an email address', category="is-warning")
-            return redirect('/register')
+            return render_template("register.html", email=email, username=username)
 
         if not is_valid_username(username):
             flash('Error: Usernames can only include: hyphens, underscores, letters and numbers', category="is-warning")
-            return redirect('/register')
+            return render_template("register.html", email=email, username=username)
         
         email_db_count = User.query.filter_by(email=email).count()
         if email_db_count > 0:
             flash('Error: Email is already taken.', category="is-warning")
-            return redirect('/register')
+            return render_template("register.html", email=email, username=username)
 
         username_db_count = User.query.filter_by(username=username).count()
         if username_db_count > 0:
             flash('Error: Username is already taken.', category="is-warning")
-            return redirect('/register')
+            return render_template("register.html", email=email, username=username)
 
         if len(email) < 3 or len(username) < 3 or len(password) < 3:
             flash('Error: Email, username or password has fewer than three characters', category="is-warning")
-            return redirect('/register')            
+            return render_template("register.html", email=email, username=username)            
 
         if password != verify:
             flash('Error: Passwords entered do not match.', category="is-warning")
-            return redirect('/register')
+            return render_template("register.html", email=email, username=username)
 
         # SUCCESS #
 

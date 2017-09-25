@@ -1,27 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>Login</h2>
 
-<table>
+
+<div class="column is-one-third is-offset-one-third">
+	<h2 class="title">Login</h2>
 	<form action="/login" method="post">
 	  
-	  <tr>
-	  	<td><label for="email_field">Email</label></td>
-	  	<td><input type="text" id="email_field" name="email"/></td>
-	  </tr>
+	  <div class="field">
+	  	<label class="label" for="email_field">Email</label>
+	  	<input class="input" type="text" id="email_field" name="email" placeholder="Email" />
+	  </div>
 	  
-	  <tr>
-	  	<td><label for="password_field">Password</label></td>
-	  	<td><input type="password" id="password_field" name="password"/></td>
-	  </tr>
+	  <div class="field">
+	  	<label class="label" for="password_field">Password</label>
+	  	<input class="input" type="password" id="password_field" name="password" placeholder="Password" />
+	  </div>
 	  
-	  <tr>
-	  	<td><input type="submit" value="Login"/></td>
-	  </tr>
-	</form>
-</table>
+	  <div class="control">
+	  	<input class="button is-primary" type="submit" value="Login"/>
+	  </div>
 
-<p>New user? <a href='/register'>Register here!</a></p>
+	</form>
+
+	<div>
+	<p>New user? <a href='/register'>Register here!</a></p>
+	</div>
+
+</div>
 
 {% endblock %}

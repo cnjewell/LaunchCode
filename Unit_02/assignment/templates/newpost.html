@@ -1,16 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 
-<form action="/blog/newpost" method="post">
-	<label>Title:<br>
-	<input type="text" name="title" label="Blog Post Title:" value="{{title}}"><br>
-	</label>
+<div class="column is-half">
+	<h2 class="title">Author New Blog Post</h2>
+	<form action="/blog/newpost" method="post">
+		<div class="field">
+			<label class="label" for="title_field">Title:</label>
+			<input class="input" type="text" name="title" id="title_field" value="{{title}}">
+		</div>
+		
+		<div class="field">
+			<label class="label" for="post_body_field">Blog Post Body:</label>
+			<textarea class="textarea" name="body" id="post_body_field">{{body}}</textarea>
+		</div>
 
-	<label>Body:<br>
-	<textarea name="body" rows="4" cols="50" label="Post Body">{{body}}</textarea><br>
-	</label>
+		<div class="control">
+			<input class="button" type="submit" value="Publish">
+		</div>
+	</form>
+</div>
 
-	<input type="submit" value="Publish"/>
-</form>
 
 {% endblock %}

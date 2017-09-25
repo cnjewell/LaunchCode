@@ -56,8 +56,6 @@ def login():
             flash('Error: One or more fields left blank', category="is-warning")
             return redirect('/login')
 
-        # TODO : Test this works properly, I'm skeptical
-
         users = User.query.filter_by(email=email)
         if users.count() != 1:
             flash('Error: Email not in our system.', category="is-warning")
@@ -93,7 +91,6 @@ def register():
         verify = request.form['verify']
 
         # VALIDATION #
-        # TODO: on failure, make sure email and username are passed back through to form fields
 
         if email == '' or username == '' or password == '' or verify == '':
             flash('Error: One or more fields left blank', category="is-warning")
@@ -153,32 +150,15 @@ def logout():
 # TODO: BLOGZ reqs
     # Pagination
 
-    # Usernames
-    # * add username to User model
-    # * add username to /registration view
-    # * validate usernames:
-        # * are not empty strings
-        # * are greater than 3 characters
-        # * alpha-numeric, hyphens, underscores
-    # - refactor username into templates where email was used before
-    # * migrate database for updated User model
-
-    # Authors (User.username)
-    # * posts by author page
-    # * authors.html, list of all the authors
-    # * Include author's username in all posts by that author
-    # * Author's name links to post-by-author page, add to templates
-
     # Posts
-    # * post title links to individual post in templates
     # - add DateTime to Post model
         # - add datetime to templates displaying posts
         # - reinitalize database for updated Post model
 
-# TODO: /blog                   display all authors
-# TODO: /blog/username          display all posts by single author, pagination included
-# TODO: /blog/posts             display all posts, pagination included
-# TODO: /blog/posts/post_id     display a single post
+# /blog                   display all authors
+# /blog/username          display all posts by single author, pagination included
+# /blog/posts             display all posts, pagination included
+# /blog/posts/post_id     display a single post by Post.id
 
 @app.route("/blog", methods=['GET'])
 @app.route("/blog/<username>", methods=['GET'])
@@ -245,7 +225,6 @@ def newpost():
 @app.route("/")
 def index():
     return render_template('index.html')
-    # Explaination of my multi-assignment conglomeration here
 
 @app.route("/web_caesar", methods=['GET', 'POST'])
 def web_caesar():
